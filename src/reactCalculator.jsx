@@ -20,35 +20,44 @@ export const Calculator = () => {
 
   return (
     <>
-      <h1>Calculator App</h1>
-      <input value={value} readOnly />
-      <div role='grid'>
-        {rows.map((row, i) => (
-          <div key={i} role='row'>
-            {row.map(number => (
-              <button
-                onClick={() => createHandleClick(number)}
-                key={number}
-              >
-                {number}
-              </button>)
-            )}
+      <div className='calculator'>
+        <h1>Calculator App</h1>
+        <div className='inputVisor'>
+          <input value={value} readOnly />
+        </div>
+        <div role='grid'>
+          {rows.map((row, i) => (
+            <div key={i} role='row'>
+              {row.map(number => (
+                <button
+                  onClick={() => createHandleClick(number)}
+                  key={number}
+                >
+                  {number}
+                </button>)
+              )}
+            </div>
+          ))}
+          {operations.map((operation) => (
+            <button
+              key={operation}
+              className='operations'
+              onClick={() => createHandleClick(operation)}
+            >
+              {operation}
+            </button>
+          ))}
+          <div className='equalButtonContainer'>
+            <button
+              className='equal'
+              onClick={() => setValue(evaluate(value))}
+            >
+              {equalSimbol}
+            </button>
           </div>
-        ))}
-        {operations.map((operation) => (
-          <button
-            key={operation}
-            onClick={() => createHandleClick(operation)}
-          >
-            {operation}
-          </button>
-        ))}
-        <button
-          onClick={() => setValue(evaluate(value))}
-        >
-          {equalSimbol}
-        </button>
+        </div>
       </div>
     </>
+
   )
 }
